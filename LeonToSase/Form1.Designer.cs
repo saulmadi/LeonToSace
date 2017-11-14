@@ -140,7 +140,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Llenar Sace con Leon excel";
+            this.Text = "Aplicacion para llenar Excel SACE con  Excel Leon Alvarado";
             this.ResumeLayout(false);
             this.PerformLayout();
 
