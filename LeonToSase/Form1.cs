@@ -43,24 +43,36 @@ namespace LeonToSase
         {
             //var datosSace = ExcelDataExtracter.ExtractSheetToDataTable(txtSace.Text, 0);
 
+            var parciales4 = rb4Parciales.Checked;
+
 
             var datosLeon = ExcelDataExtracter.ExtractSheetToDataTable(txtLeon.Text, 5);
 
-            var lista = datosLeon.Select(dataRow => new Datos
-            {
-                Identidad = dataRow.Field<string>("F2"),
-                Ina1 = dataRow.GetValue<int>("F4"),
-                Niv1 = dataRow.GetValue<int>("F8"),
-                Total1 = dataRow.GetValue<int>("F9"),
-                Ina2 = dataRow.GetValue<int>("F10"),
-                Niv2 = dataRow.GetValue<int>("F14"),
-                Total2 = dataRow.GetValue<int>("F15"),
-                Ina3 = dataRow.GetValue<int>("F16"),
-                Niv3 = dataRow.GetValue<int>("F20"),
-                Total3 = dataRow.GetValue<int>("F21"),
-                Ina4 = dataRow.GetValue<int>("F22"),
-                Total4 = dataRow.GetValue<int>("F26")
-            }).ToList();
+            var lista = datosLeon.Select(dataRow => parciales4
+                ? new Datos
+                {
+                    Identidad = dataRow.Field<string>("F2"),
+                    Ina1 = dataRow.GetValue<int>("F4"),
+                    Niv1 = dataRow.GetValue<int>("F8"),
+                    Total1 = dataRow.GetValue<int>("F9"),
+                    Ina2 = dataRow.GetValue<int>("F10"),
+                    Niv2 = dataRow.GetValue<int>("F14"),
+                    Total2 = dataRow.GetValue<int>("F15"),
+                    Ina3 = dataRow.GetValue<int>("F16"),
+                    Niv3 = dataRow.GetValue<int>("F20"),
+                    Total3 = dataRow.GetValue<int>("F21"),
+                    Ina4 = dataRow.GetValue<int>("F22"),
+                    Total4 = dataRow.GetValue<int>("F26")
+                }
+                : new Datos
+                {
+                    Identidad = dataRow.Field<string>("F2"),
+                    Ina1 = dataRow.GetValue<int>("F4"),
+                    Niv1 = dataRow.GetValue<int>("F8"),
+                    Total1 = dataRow.GetValue<int>("F9"),
+                    Ina2 = dataRow.GetValue<int>("F10"),
+                    Total2 = dataRow.GetValue<int>("F14")
+                }).ToList();
 
 
             var MyApp = new Application {Visible = false};
@@ -72,28 +84,42 @@ namespace LeonToSase
             var row = 8;
             while (flag)
             {
-                var identidad = (string) MySheet.get_Range("B" +row, "B" + row).Cells.Value;
+                var identidad = (string) MySheet.get_Range("B" + row, "B" + row).Cells.Value;
                 var alumano = lista.FirstOrDefault(d => d.Identidad == identidad);
 
                 if (alumano != null)
                 {
-                    MySheet.Cells[row, "D"] = alumano.Ina1;
-                    MySheet.Cells[row, "E"] = alumano.Total1 - alumano.Niv1;
-                    MySheet.Cells[row, "F"] = alumano.Niv1;
+                    if (parciales4)
+                    {
+                        MySheet.Cells[row, "D"] = alumano.Ina1;
+                        MySheet.Cells[row, "E"] = alumano.Total1 - alumano.Niv1;
+                        MySheet.Cells[row, "F"] = alumano.Niv1;
 
-                    MySheet.Cells[row, "G"] = alumano.Ina2;
-                    MySheet.Cells[row, "H"] = alumano.Total2 - alumano.Niv2;
-                    MySheet.Cells[row, "I"] = alumano.Niv2;
+                        MySheet.Cells[row, "G"] = alumano.Ina2;
+                        MySheet.Cells[row, "H"] = alumano.Total2 - alumano.Niv2;
+                        MySheet.Cells[row, "I"] = alumano.Niv2;
 
-                    MySheet.Cells[row, "J"] = alumano.Ina3;
-                    MySheet.Cells[row, "K"] = alumano.Total3 - alumano.Niv3;
-                    MySheet.Cells[row, "L"] = alumano.Niv3;
+                        MySheet.Cells[row, "J"] = alumano.Ina3;
+                        MySheet.Cells[row, "K"] = alumano.Total3 - alumano.Niv3;
+                        MySheet.Cells[row, "L"] = alumano.Niv3;
 
 
-                    MySheet.Cells[row, "M"] = alumano.Ina4;
-                    MySheet.Cells[row, "N"] = alumano.Total4 ;
+                        MySheet.Cells[row, "M"] = alumano.Ina4;
+                        MySheet.Cells[row, "N"] = alumano.Total4;
+
+                    }
+                    else
+                    {
+                        MySheet.Cells[row, "D"] = alumano.Ina1;
+                        MySheet.Cells[row, "E"] = alumano.Total1 - alumano.Niv1;
+                        MySheet.Cells[row, "F"] = alumano.Niv1;
+
+                        MySheet.Cells[row, "G"] = alumano.Ina2;
+                        MySheet.Cells[row, "H"] = alumano.Total2;
+                        
+
+                    }
                     
-
                 }
                 row++;
                 if (identidad == null)
@@ -103,6 +129,8 @@ namespace LeonToSase
             MyBook.Close();
 
             Marshal.ReleaseComObject(MyBook);
+
+            MessageBox.Show(@"Archivo Generado Correctamente");
         }
     }
 

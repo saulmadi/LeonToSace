@@ -35,6 +35,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.rb4Parciales = new System.Windows.Forms.RadioButton();
+            this.rb2Parciales = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -101,11 +103,35 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // rb4Parciales
+            // 
+            this.rb4Parciales.AutoSize = true;
+            this.rb4Parciales.Checked = true;
+            this.rb4Parciales.Location = new System.Drawing.Point(59, 151);
+            this.rb4Parciales.Name = "rb4Parciales";
+            this.rb4Parciales.Size = new System.Drawing.Size(77, 17);
+            this.rb4Parciales.TabIndex = 7;
+            this.rb4Parciales.TabStop = true;
+            this.rb4Parciales.Text = "4 Parciales";
+            this.rb4Parciales.UseVisualStyleBackColor = true;
+            // 
+            // rb2Parciales
+            // 
+            this.rb2Parciales.AutoSize = true;
+            this.rb2Parciales.Location = new System.Drawing.Point(142, 151);
+            this.rb2Parciales.Name = "rb2Parciales";
+            this.rb2Parciales.Size = new System.Drawing.Size(77, 17);
+            this.rb2Parciales.TabIndex = 8;
+            this.rb2Parciales.Text = "2 Parciales";
+            this.rb2Parciales.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 202);
+            this.Controls.Add(this.rb2Parciales);
+            this.Controls.Add(this.rb4Parciales);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -129,6 +155,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RadioButton rb4Parciales;
+        private System.Windows.Forms.RadioButton rb2Parciales;
     }
 }
 
