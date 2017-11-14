@@ -41,7 +41,7 @@ namespace LeonToSase
                 
                 myCommand.Connection = con;
 
-                var sql =  $"Update [{firstSheetName}] set {columana}={valor} where F2='{identidad}'";
+                var sql =  $"Update [{firstSheetName}] set {columana}$={valor} where F2$='{identidad}'";
                 myCommand.CommandText = sql;
                 myCommand.ExecuteNonQuery();
                 con.Close();
